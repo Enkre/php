@@ -1,48 +1,59 @@
-<html>
+ml>
 <head>
-<title>Hello World</title>
+
+<header>
+ <h2>Friend book</h2>
+</header>
+
+
+
+<style>
+
+/* Style the header */
+header {
+ background-color: #666;
+ padding: 30px;
+ text-align: center;
+ font-size: 35px;
+ color: white;
+}
+/* Style the footer */
+footer {
+ background-color: #777;
+ padding: 10px;
+ text-align: center;
+ color: white;
+}
+</style>
 </head>
-<body style="text align: center; font-size: 50px;">
+
+
+<body>
+
+<form action="index.php" method="post">
+Name: <input type="text" name="name">
+<input type="submit">
+</form>
+
 <?php
-if(!isset($_GET['op']) || !isset($_GET['x']) || !isset($_GET['y'])){
-	echo "<h1>Error! Incomplete data</h1>";
-	exit();
+echo "<h1>My best friend: </h1>";
+if (isset($_POST['name'])) {
+ $name = $_POST['name'];
 }
-$x=$_GET['x'];
-$y=$_GET['y'];
-
-switch ($_GET['op']) {
-	case 'sum':
-		$result=$x+$y;
-		echo "<h1>$x + $y = $result</h1>";
-	break;
-
-	case 'subtract':
-		$result=$x-$y;
-		echo "<h1>$x - $y = $result </h1>";
-	break;
-
-	case 'divide':
-		if($y==0){
-			echo "error, dividor can't be 0";
-		}
-		else {
-			$result=$x/$y;
-			echo "<h1>$x / $y = $result</h1>";
-		}
-	break;
-
-	case 'multiply':
-		$result=$x*$y;
-		echo "<h1>$x x $y = $result </h1>";
-		break;
-
-	default:
-		$op=$_GET['op'];
-		echo "<h1>Unrecognized operation: $op</h1>";
+$filename = 'newfile.txt';
+echo file_get_contents($filename);
+$file = fopen( $filename, "a+" );
+if( $file != false ) {
+ echo "<b>$name</b><br>";
+ fwrite( $file, "$name\n" );
+ fclose( $file );
 }
-
 
 ?>
+
 </body>
+
+<footer>
+ <p>Footer</p>
+</footer>
 </html>
