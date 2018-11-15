@@ -64,12 +64,29 @@ if (isset($_POST['name']) && strlen($_POST['name']) > 0) {
          fwrite( $file, $name . "\n" );
          fclose( $file );
     }
+    
+    while (!feof($file)) {
+	    $ligne=fgets($file);
+	    if(isset($_POST['filter']) and $_POST['filter']!=''){
+	    	$ligne=strstr($ligne, $_POST['filter'],true).strstr($ligne, $_POST['filter']);
+	    	if($ligne)echo "<ul><li>$ligne</ul></li><br>";
+	    }
+	    else{
+	    	if($ligne)echo "<ul><li>$ligne</ul></li><br>";
+	    }
+    }
 
-}
 echo "</ul>";
 
 ?>
-
+    
+<br>
+	<form method="post" action="index.php" >
+	<input type="text" name="filter">
+	<input type="submit" value="Filter list">
+	</form>
+<br>
+    
 </body>
 
 <footer>
