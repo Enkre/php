@@ -40,17 +40,18 @@ li{
 
 <p><b>My Best Friends :</b></p>
 <?php
-	$filename = 'friends.txt';
+	$filename = 'newfile.txt';
 	if(isset($_POST['name'])) {
 		$file = fopen( $filename, "a" );
 		fwrite( $file, $_POST['name']);
 		fwrite( $file, "\n");
+        fclose($file);
 	}
 
 	$file = fopen( $filename, "r" );
 	while (!feof($file)) {
 	    $ligne=fgets($file);
-	    if(isset($_POST['filter']) and $_POST['filter']!=''){
+	    if(isset($_POST['filter'])){
 	    	$ligne=strstr($ligne, $_POST['filter'],true).strstr($ligne, $_POST['filter']);
 	    	if($ligne)echo "<ul><li>$ligne</ul></li><br>";
 	    }
@@ -59,6 +60,7 @@ li{
 	    }
 	    
 	}
+    fclose($file);
 	
     ?>
 <br>
